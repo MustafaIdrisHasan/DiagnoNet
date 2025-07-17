@@ -1,0 +1,103 @@
+{
+  "job_id": "43790688435f409c9f7221ad9fc32af7",
+  "filename": "43790688435f409c9f7221ad9fc32af7_dummy_pneumonia_report.pdf",
+  "analysis_timestamp": "2025-07-17T13:46:37.948835",
+  "status": "completed",
+  "symptoms_analysis": {
+    "symptoms_detected": [
+      "chest_pain",
+      "shortness_of_breath",
+      "fever",
+      "cough",
+      "fatigue"
+    ],
+    "symptom_analysis": {
+      "extracted_symptoms": {
+        "chest_pain": 1.0,
+        "shortness_of_breath": 1.0,
+        "fever": 1.0,
+        "cough": 1.0,
+        "fatigue": 0.7700000000000001
+      },
+      "extraction_confidence": 0.967,
+      "total_symptoms": 5,
+      "extraction_method": "enhanced_medical_nlp"
+    },
+    "primary_diagnosis": "Pneumonia",
+    "confidence": 1.0,
+    "differential_diagnoses": [
+      {
+        "condition": "Arthritis",
+        "confidence": 0.0,
+        "confidence_percentage": 0.0,
+        "description": "Very Low - Remote diagnostic possibility"
+      },
+      {
+        "condition": "Common Cold",
+        "confidence": 0.0,
+        "confidence_percentage": 0.0,
+        "description": "Very Low - Remote diagnostic possibility"
+      },
+      {
+        "condition": "Gastroenteritis",
+        "confidence": 0.0,
+        "confidence_percentage": 0.0,
+        "description": "Very Low - Remote diagnostic possibility"
+      }
+    ],
+    "predictions": {
+      "primary": {
+        "disease": "Pneumonia",
+        "confidence_percentage": 100.0,
+        "confidence_level": "Very High - Strong diagnostic indication"
+      },
+      "differential": [
+        {
+          "condition": "Arthritis",
+          "confidence": 0.0,
+          "confidence_percentage": 0.0,
+          "description": "Very Low - Remote diagnostic possibility"
+        },
+        {
+          "condition": "Common Cold",
+          "confidence": 0.0,
+          "confidence_percentage": 0.0,
+          "description": "Very Low - Remote diagnostic possibility"
+        },
+        {
+          "condition": "Gastroenteritis",
+          "confidence": 0.0,
+          "confidence_percentage": 0.0,
+          "description": "Very Low - Remote diagnostic possibility"
+        }
+      ],
+      "ml_confidence": 1.0
+    },
+    "urgency_level": "Emergency",
+    "overall_confidence": 0.984,
+    "clinical_assessment": {
+      "urgency": "Emergency",
+      "recommendation": "Seek immediate emergency medical attention",
+      "severity_assessment": "CRITICAL",
+      "clinical_coherence": 0.8
+    },
+    "recommendations": [
+      "Avoid physical exertion until medical clearance",
+      "Do not delay medical care",
+      "Monitor breathing and oxygen levels",
+      "Stay hydrated and monitor temperature",
+      "Seek immediate emergency medical attention",
+      "Consider calling emergency services if symptoms worsen"
+    ],
+    "urgency_recommendation": "Seek immediate emergency medical attention",
+    "ai_analysis": null,
+    "agent_type": "symptoms_analysis",
+    "analysis_metadata": {
+      "follow_up_needed": false,
+      "follow_up_questions": [],
+      "symptom_completeness": 1.0,
+      "extraction_method": "enhanced_medical_nlp_v2"
+    },
+    "timestamp": "2025-07-17T13:46:37.955397"
+  }
+}

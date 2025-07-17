@@ -1,0 +1,217 @@
+# ===================================
+# DIAGNONET PROJECT .GITIGNORE
+# ===================================
+
+# ===== PYTHON/BACKEND =====
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+diagnonet-backend/.venv/
+
+# PyTorch models and weights
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+models/
+checkpoints/
+weights/
+
+# Medical AI model files (large files)
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.joblib
+
+# Specific model files to exclude
+diagnonet-backend/agents/symptoms model/backend/disease_predictor_model.pkl
+diagnonet-backend/agents/symptoms model/disease_predictor_model.pkl
+diagnonet-backend/agents/symptoms model/advanced_disease_predictor.pkl
+
+# Large PyTorch files
+*.dll
+*.lib
+torch_cpu.dll
+dnnl.lib
+
+# ===== NODE.JS/FRONTEND =====
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Production builds
+build/
+dist/
+.next/
+out/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# ===== ENVIRONMENT & CONFIG =====
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# API keys and secrets
+.env.example
+config.json
+secrets.json
+*.key
+*.pem
+
+# ===== MEDICAL DATA & OUTPUTS =====
+# Generated medical visualizations
+gradcam_visualizations/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+*.dcm
+*.dicom
+
+# Medical datasets (HIPAA compliance)
+datasets/
+patient_data/
+medical_images/
+xray_images/
+test_images/
+sample_data/
+
+# Analysis outputs
+results/
+outputs/
+reports/
+logs/
+*.log
+
+# ===== DEVELOPMENT TOOLS =====
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# ===== SYSTEM FILES =====
+# Windows
+*.exe
+*.msi
+*.dll
+OllamaSetup.exe
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# ===== BACKUP & TEMPORARY =====
+# Backup directories
+*-backup/
+*-backup-*/
+backup/
+backups/
+src-backup-original/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# ===== DUPLICATE FRONTENDS =====
+# Keep only the main frontend
+diagnonet-frontend-react/
+diagnonet-react-frontend/
+
+# ===== LARGE FILES & BINARIES =====
+# Large model files
+*.bin
+*.model
+*.weights
+*.onnx
+
+# Compressed files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# ===== TESTING =====
+# Test files
+test_*.py
+*_test.py
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ===== DOCUMENTATION =====
+# Generated docs
+docs/_build/
+site/
+
+# ===== MISC =====
+# Flexsyyy backup folder
+flexsyyy-diagnonet/
+
+# Package lock files (keep package.json, ignore lock files)
+package-lock.json
+yarn.lock

@@ -1,0 +1,42 @@
+# Medical AI Diagnosis System - Production Requirements
+# Core ML and Data Processing
+scikit-learn>=1.3.0
+pandas>=2.0.0
+numpy>=1.24.0
+joblib>=1.3.0
+scipy>=1.10.0
+
+# Medical NLP - ScispaCy and dependencies
+spacy>=3.6.0
+scispacy>=0.5.3
+# Note: ScispaCy models must be installed separately:
+# pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.3/en_core_sci_md-0.5.3.tar.gz
+# pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.3/en_ner_bc5cdr_md-0.5.3.tar.gz
+
+# Text Processing and Fuzzy Matching
+fuzzywuzzy>=0.18.0
+python-Levenshtein>=0.21.0
+
+# Optional AI Enhancement
+groq>=0.4.0
+
+# Data Handling and Utilities
+requests>=2.31.0
+tqdm>=4.65.0
+
+# Development and Testing (optional)
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Model Performance Visualization (optional)
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Database support for conversation storage (optional)
+sqlite3  # Built into Python
+
+# Logging and Configuration
+python-dotenv>=1.0.0
+
+# For Kaggle dataset downloads (development only)
+kagglehub>=0.2.0
