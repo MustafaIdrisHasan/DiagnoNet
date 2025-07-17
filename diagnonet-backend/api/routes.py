@@ -27,7 +27,19 @@ router = APIRouter()
 
 # Initialize the agents
 vitals_agent = VitalsAgent()
-symptoms_ai = StreamlinedMedicalAI()
+
+# Initialize symptoms AI with error handling
+try:
+    symptoms_ai = StreamlinedMedicalAI()
+    if not symptoms_ai.initialized:
+        logger.warning("Symptoms AI initialization failed - symptoms analysis will be limited")
+        symptoms_ai = None
+    else:
+        logger.info("Symptoms AI initialized successfully")
+except Exception as e:
+    logger.error(f"Failed to initialize symptoms AI: {e}")
+    symptoms_ai = None
+
 supervisor_agent = SupervisorAgent()
 
 # Enhanced X-ray analysis class
@@ -398,20 +410,23 @@ async def biogpt_medical_analysis(
         # Step 1.5: Analyze symptoms for ML disease prediction (if provided)
         ml_disease_prediction = None
         if symptoms_text and symptoms_text.strip():
-            try:
-                symptoms_result = symptoms_ai.analyze_symptoms(symptoms_text)
-                if 'predictions' in symptoms_result and symptoms_result['predictions']['primary']:
-                    primary_prediction = symptoms_result['predictions']['primary']
-                    ml_disease_prediction = {
-                        'disease': primary_prediction['disease'],
-                        'confidence': primary_prediction['confidence_percentage'] / 100.0
-                    }
-                    logger.info(f"ML disease prediction: {ml_disease_prediction['disease']} ({ml_disease_prediction['confidence']:.1%})")
-                else:
-                    logger.info("No ML disease prediction available from symptoms")
-            except Exception as e:
-                logger.error(f"Symptoms analysis failed: {str(e)}")
-                # Continue without ML prediction
+            if symptoms_ai is None:
+                logger.warning("Symptoms AI not available - skipping ML disease prediction")
+            else:
+                try:
+                    symptoms_result = symptoms_ai.analyze_symptoms(symptoms_text)
+                    if 'predictions' in symptoms_result and symptoms_result['predictions']['primary']:
+                        primary_prediction = symptoms_result['predictions']['primary']
+                        ml_disease_prediction = {
+                            'disease': primary_prediction['disease'],
+                            'confidence': primary_prediction['confidence_percentage'] / 100.0
+                        }
+                        logger.info(f"ML disease prediction: {ml_disease_prediction['disease']} ({ml_disease_prediction['confidence']:.1%})")
+                    else:
+                        logger.info("No ML disease prediction available from symptoms")
+                except Exception as e:
+                    logger.error(f"Symptoms analysis failed: {str(e)}")
+                    # Continue without ML prediction
 
         # Step 2: Analyze X-ray if provided (bypassing BioGPT for now)
         xray_result = None
@@ -517,6 +532,22 @@ async def symptoms_analysis(symptoms_text: str = Form(...)):
     """
     try:
         logger.info(f"Symptoms analysis requested for: {symptoms_text[:100]}...")
+
+        # Check if symptoms AI is available
+        if symptoms_ai is None:
+            return {
+                "error": "Symptoms analysis not available",
+                "message": "Symptoms AI failed to initialize. Please check configuration.",
+                "troubleshooting": {
+                    "steps": [
+                        "1. Ensure all Python packages are installed: pip install -r requirements.txt",
+                        "2. For enhanced analysis, set GROQ_API_KEY environment variable",
+                        "3. Check that required model files are present",
+                        "4. Restart the backend server"
+                    ],
+                    "note": "Basic vitals analysis is still available"
+                }
+            }
 
         # Analyze symptoms using the enhanced symptoms AI
         result = symptoms_ai.analyze_symptoms(symptoms_text)

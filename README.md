@@ -25,6 +25,14 @@ DiagnoNET 2.0 is an advanced multi-modal medical diagnosis platform that combine
 - **Real-time Processing**: Background task processing with polling
 - **Comprehensive Reports**: Detailed medical reports with recommendations
 - **JSON Export**: Structured data output for integration
+- **Graceful Degradation**: System remains functional even if some components fail
+
+### 🛡️ **Resilient Design**
+DiagnoNET 2.0 is designed to work even with missing dependencies:
+- **No Groq API Key**: Symptoms analysis uses ML-only predictions (still functional)
+- **Missing Ollama**: Clinical summaries use fallback text generation
+- **Network Issues**: Local ML models continue to work offline
+- **Component Failures**: Other agents remain operational
 
 ## 🚀 Quick Start
 
@@ -270,6 +278,76 @@ python "agents/x-ray chest/run_cxr.py" \
 - Verify backend is running on port 8001
 - Check CORS configuration in backend
 - Ensure frontend API_BASE_URL points to correct backend URL
+
+#### **🔑 API Key Configuration Issues**
+
+**Symptoms Analysis Not Working:**
+```
+Error: "Symptoms analysis not available" or "Groq AI not configured"
+```
+
+**Solution:**
+1. **Get a Groq API Key** (Free):
+   - Visit: https://console.groq.com/
+   - Sign up for a free account
+   - Generate an API key
+
+2. **Set Environment Variable**:
+   ```bash
+   # Windows (Command Prompt)
+   set GROQ_API_KEY=your_api_key_here
+
+   # Windows (PowerShell)
+   $env:GROQ_API_KEY="your_api_key_here"
+
+   # Linux/Mac
+   export GROQ_API_KEY="your_api_key_here"
+   ```
+
+3. **Or Create .env File**:
+   ```bash
+   # Copy template
+   cp diagnonet-backend/.env.example diagnonet-backend/.env
+
+   # Edit .env file and add:
+   GROQ_API_KEY=your_api_key_here
+   ```
+
+4. **Restart Backend Server** after setting the API key
+
+**Note**: DiagnoNET will still work without Groq API key, but with limited symptoms analysis capabilities. Vitals and X-ray analysis remain fully functional.
+
+#### **🧪 Missing Python Packages**
+```
+Error: "ModuleNotFoundError" or "ImportError"
+```
+
+**Solution:**
+```bash
+cd diagnonet-backend
+pip install -r requirements.txt
+
+# If specific packages are missing:
+pip install torch torchvision
+pip install torchxrayvision
+pip install groq
+pip install transformers
+pip install scikit-learn
+```
+
+#### **🔧 System Initialization Failed**
+```
+Error: "System initialization failed" in backend logs
+```
+
+**Solution:**
+1. Check all dependencies are installed
+2. Verify Python version compatibility (3.11+)
+3. Ensure sufficient disk space for model downloads
+4. Check internet connection for initial model downloads
+5. Restart backend server: `Ctrl+C` then restart
+
+**The system is designed to be resilient - even if some components fail, core functionality remains available.**
 
 ## 📄 License
 

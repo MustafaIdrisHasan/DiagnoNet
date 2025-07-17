@@ -39,14 +39,22 @@ class StreamlinedMedicalAI:
             if not self.ml_predictor:
                 return False
 
-            # Initialize Groq AI (optional)
+            # Initialize Groq AI (optional - for enhanced analysis)
             try:
                 api_key = os.getenv('GROQ_API_KEY')
                 if api_key:
                     from groq import Groq
                     self.groq_client = Groq(api_key=api_key)
-            except:
-                pass
+                    print("✅ Groq AI enhancement enabled")
+                else:
+                    print("ℹ️  Groq AI not configured (optional) - using ML-only predictions")
+                    print("   To enable enhanced analysis, set GROQ_API_KEY environment variable")
+            except ImportError:
+                print("ℹ️  Groq package not installed (optional) - using ML-only predictions")
+                print("   To install: pip install groq")
+            except Exception as e:
+                print(f"ℹ️  Groq AI initialization failed (optional): {e}")
+                print("   Continuing with ML-only predictions")
 
             self.initialized = True
             return True
@@ -403,11 +411,19 @@ def main():
     ai = StreamlinedMedicalAI()
     
     if not ai.initialized:
-        print("Error: System initialization failed")
+        print("❌ Error: System initialization failed")
+        print("\n🔧 Troubleshooting:")
+        print("1. Ensure Python packages are installed: pip install -r requirements.txt")
+        print("2. For enhanced analysis, set GROQ_API_KEY environment variable")
+        print("3. Check that all required model files are present")
         return
-    
-    print("Medical AI Ready")
-    print("Enter symptom descriptions (type 'quit' to exit):")
+
+    print("🏥 Medical AI Ready")
+    if ai.groq_client:
+        print("✨ Enhanced AI analysis enabled")
+    else:
+        print("📊 ML-only analysis mode (still fully functional)")
+    print("\nEnter symptom descriptions (type 'quit' to exit):")
     
     while True:
         try:
